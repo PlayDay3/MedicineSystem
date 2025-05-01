@@ -72,7 +72,9 @@ public class TextWord : MonoBehaviour
 
             // 设置标题
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            builder.Writeln("多祝镇皇思扬卫生站处方笺");
+            builder.Font.Size = 22;
+            builder.Writeln("多祝镇皇思扬村卫生站处方笺");
+            builder.Font.Size = 12;
             builder.Writeln();
 
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Right;
@@ -141,9 +143,9 @@ public class TextWord : MonoBehaviour
 
             // 医师签名和金额 (底部对齐)
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.Writeln($"医师:{Prescription.Doctor}\t\t挂号费{Prescription.SignCost}\t注射费{Prescription.InjectionCost}\t治疗费{Prescription.TreatmentCost}\t");
+            builder.Writeln($"医师:{Prescription.Doctor}\t\t挂号费{Prescription.SignCost}\t注射费{Prescription.InjectionCost}\t治疗费{Prescription.TreatmentCost}\t材料费{Prescription.Profit}");
             builder.Writeln();
-            builder.Writeln($"审核:{Prescription.Check}\t\t药物费{Prescription.MedicineCost}\t基本费{Prescription.OriginalCost}\t其他{Prescription.OtherCost}\t\t收入差额{Prescription.Profit}");
+            builder.Writeln($"审核:{Prescription.Check}\t\t药品费{Prescription.MedicineCost}\t基本费{Prescription.OriginalCost}\t其他{Prescription.OtherCost}\t");
             //builder.Writeln($"挂号费{Prescription.SignCost}\t注射费{Prescription.InjectionCost}\t治疗费{Prescription.TreatmentCost}\t" +
             //    $"药物费{Prescription.MedicineCost}\t总金额:{Prescription.MedicineCost}");
             builder.Writeln();

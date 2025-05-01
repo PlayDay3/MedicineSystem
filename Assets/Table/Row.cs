@@ -26,6 +26,8 @@ public class Row : MonoBehaviour
 
     public void InitializeItem()
     {
+
+
         //medicineData = this.GetComponent<MedicineData>();
         if (medicineData != null)
         {
@@ -121,12 +123,10 @@ public class Row : MonoBehaviour
                 switch (medicineData.MedicineMessage.minunit.ToString())
                 {
                     case "片":
-                        TempDrop.value = 0;
-                        
+                        TempDrop.value = 0;                      
                         break;
                     case "粒":
-                        TempDrop.value = 1;
-                        
+                        TempDrop.value = 1;                    
                         break;
                     case "支":
                         TempDrop.value = 2;                       
@@ -139,6 +139,24 @@ public class Row : MonoBehaviour
                         break;
                     case "袋":
                         TempDrop.value = 5;
+                        break;
+                    case "块":
+                        TempDrop.value = 6;
+                        break;
+                    case "盒":
+                        TempDrop.value = 7;
+                        break;
+                    case "ml":
+                        TempDrop.value = 8;
+                        break;
+                    case "g":
+                        TempDrop.value = 9;
+                        break;
+                    case "mg":
+                        TempDrop.value = 10;
+                        break;
+                    case "kg":
+                        TempDrop.value = 11;
                         break;
                 }
                 TempDrop.RefreshShownValue();
@@ -185,31 +203,6 @@ public class Row : MonoBehaviour
                 //field = this.transform.Find("用法")?.GetChild(0)?.GetComponent<TMP_InputField>();
                 //if (field) field.text = medicineData.usage;
 
-                TempDrop = this.transform.Find("用法")?.GetChild(1).GetComponent<TMP_Dropdown>();
-                switch (medicineData.Useway.ToString())
-                {
-                    case "口服":
-                        TempDrop.value = 0;
-                        break;
-                    case "静脉滴注":
-                        TempDrop.value = 1;
-                        break;
-                    case "外用":
-                        TempDrop.value = 2;
-                        break;
-                    case "ivdrip15gtt_min":
-                        TempDrop.value = 3;
-                        break;
-                    case "ivdrip40gtt_min":
-                        TempDrop.value = 4;
-                        break;
-                    case "ivdrip60gtt_min":
-                        TempDrop.value = 5;
-                        break;
-                }
-                TempDrop.RefreshShownValue();
-
-
                 field = this.transform.Find("产地")?.GetChild(0)?.GetComponent<TMP_InputField>();
                 if (field) field.text = medicineData.MedicineMessage.source;
                 
@@ -241,6 +234,7 @@ public class Row : MonoBehaviour
                 if (field) field.text = medicineData.addnumber.ToString();
 
                 TempDrop = this.transform.Find("服用次数")?.GetChild(1).GetComponent<TMP_Dropdown>();
+                TempDrop.onValueChanged.RemoveAllListeners();
                 switch (medicineData.Times.ToString())
                 {
                     case "一":
@@ -254,17 +248,59 @@ public class Row : MonoBehaviour
                         break;
                 }
                 TempDrop.RefreshShownValue();
+                TempDrop.onValueChanged.AddListener(index => OnValueChange());
+
+                TempDrop = this.transform.Find("用法")?.GetChild(1).GetComponent<TMP_Dropdown>();
+                TempDrop.onValueChanged.RemoveAllListeners();
+                switch (medicineData.Useway.ToString())
+                {
+                    case "口服":
+                        TempDrop.value = 0;
+                        break;
+                    case "晚上睡前口服":
+                        TempDrop.value = 1;
+                        break;
+                    case "必要时口服":
+                        TempDrop.value = 2;
+                        break;
+                    case "冲服":
+                        TempDrop.value = 3;
+                        break;
+                    case "外用":
+                        TempDrop.value = 4;
+                        break;
+                    case "静脉滴注":
+                        TempDrop.value = 5;
+                        break;
+                    case "ivdrip15gtt_min":
+                        TempDrop.value = 6;
+                        break;
+                    case "ivdrip40gtt_min":
+                        TempDrop.value = 7;
+                        break;
+                    case "ivdrip50gtt_min":
+                        TempDrop.value = 8;
+                        break;
+                    case "ivdrip60gtt_min":
+                        TempDrop.value = 9;
+                        break;
+                    case "im":
+                        TempDrop.value = 10;
+                        break;
+                }
+                TempDrop.RefreshShownValue();
+                TempDrop.onValueChanged.AddListener(index => OnValueChange());
+
 
             }
             TMP_Dropdown dropdown = this.transform.Find("单位")?.GetChild(0).GetComponent<TMP_Dropdown>();
+            dropdown.onValueChanged.RemoveAllListeners();
             switch (medicineData.unit.ToString())
             {
                 case "granule"://英文
                     dropdown.value = 0;
-                    dropdown.RefreshShownValue();
-                    
-                    //medicineData.BoxNumber = medicineData.granuleNumber / int.Parse(medicineData.MedicineMessage.capacity.ToString());
-                    
+                    dropdown.RefreshShownValue();        
+                    //medicineData.BoxNumber = medicineData.granuleNumber / int.Parse(medicineData.MedicineMessage.capacity.ToString());                  
                     break;
                 case "box":
                     dropdown.value = 1;
@@ -274,10 +310,10 @@ public class Row : MonoBehaviour
                     break;
                 case "bag":
                     dropdown.value = 2;
-                    dropdown.RefreshShownValue();
-                    
+                    dropdown.RefreshShownValue();                    
                     break;
-            }             
+            }
+            dropdown.onValueChanged.AddListener(index=> OnValueChange());
 
         }
     }
@@ -345,7 +381,24 @@ public class Row : MonoBehaviour
                     case 5:
                         medicineData.MedicineMessage.minunit = BaseEnum.袋;
                         break;
-
+                    case 6:
+                        medicineData.MedicineMessage.minunit = BaseEnum.块;
+                        break;
+                    case 7:
+                        medicineData.MedicineMessage.minunit = BaseEnum.盒;
+                        break;
+                    case 8:
+                        medicineData.MedicineMessage.minunit = BaseEnum.ml;
+                        break;
+                    case 9:
+                        medicineData.MedicineMessage.minunit = BaseEnum.g;
+                        break;
+                    case 10:
+                        medicineData.MedicineMessage.minunit = BaseEnum.mg;
+                        break;
+                    case 11:
+                        medicineData.MedicineMessage.minunit = BaseEnum.kg;
+                        break;
                 }
             }
             if (this.transform.Find("规格"))
@@ -398,19 +451,34 @@ public class Row : MonoBehaviour
                         medicineData.Useway=Useway.口服;
                         break;
                     case 1:
-                        medicineData.Useway = Useway.静脉注射;
+                        medicineData.Useway = Useway.晚上睡前口服;
                         break;
                     case 2:
-                        medicineData.Useway = Useway.外用;
+                        medicineData.Useway = Useway.必要时口服;
                         break;
                     case 3:
-                        medicineData.Useway = Useway.ivdrip15gtt_min;
+                        medicineData.Useway = Useway.冲服;
                         break;
                     case 4:
-                        medicineData.Useway = Useway.ivdrip40gtt_min;
+                        medicineData.Useway = Useway.外用;
                         break;
                     case 5:
+                        medicineData.Useway = Useway.静脉滴注;
+                        break;
+                    case 6:
+                        medicineData.Useway = Useway.ivdrip15gtt_min;
+                        break;
+                    case 7:
+                        medicineData.Useway = Useway.ivdrip40gtt_min;
+                        break;
+                    case 8:
+                        medicineData.Useway = Useway.ivdrip50gtt_min;
+                        break;
+                    case 9:
                         medicineData.Useway = Useway.ivdrip60gtt_min;
+                        break;
+                    case 10:
+                        medicineData.Useway = Useway.im;
                         break;
 
                 }
@@ -723,8 +791,40 @@ public class Row : MonoBehaviour
         TableManager.Instance.AddSellList(medicineData);
     }
 
+    public void OnChangeUseWay()
+    {
+        if (this.transform.Find("用法"))
+        {
+            TMP_Dropdown dropdown = this.transform.Find("用法")?.GetChild(1).GetComponent<TMP_Dropdown>();
+            switch (dropdown.value)
+            {
+                case 0:
+                    medicineData.Useway = Useway.口服;
+                    break;
+                case 1:
+                    medicineData.Useway = Useway.静脉滴注;
+                    break;
+                case 2:
+                    medicineData.Useway = Useway.外用;
+                    break;
+                case 3:
+                    medicineData.Useway = Useway.ivdrip15gtt_min;
+                    break;
+                case 4:
+                    medicineData.Useway = Useway.ivdrip40gtt_min;
+                    break;
+                case 5:
+                    medicineData.Useway = Useway.ivdrip60gtt_min;
+                    break;
+
+            }
+        }
+
+    }
+
     public void OnValueChange()
     {
+
         returnItem();
         changeNumber();
         int TempTimes;

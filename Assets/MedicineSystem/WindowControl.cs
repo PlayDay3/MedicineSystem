@@ -77,6 +77,8 @@ public class WindowControl : MonoBehaviour
         Row.ReturnToList();
         TableManager.Instance.RemoveMedicine(Row.medicineData);
         SetWindowData(null);        //Çå³ýWindowControlÊý¾Ý
+        MedicineSerializable.instance.SaveData();
+        MedicineSerializable.instance.SaveNameList();
     }
 
     public void SellWindow(bool isSell)
