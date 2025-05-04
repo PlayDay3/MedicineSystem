@@ -337,6 +337,7 @@ public class TableManager : MonoBehaviour
                 + prescription.instance.PrescriptionMessage.SignCost + prescription.instance.PrescriptionMessage.OtherCost + prescription.instance.PrescriptionMessage.TreatmentCost;
             prescription.instance.PrescriptionMessage.Profit = prescription.instance.PrescriptionMessage.SumCost - prescription.instance.PrescriptionMessage.OriginalCost;
             prescription.instance.Setprescription();
+            prescription.instance.ReturnPrescription();//保存处方单
         }
 
     }

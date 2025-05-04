@@ -1164,22 +1164,22 @@ PrefabInstance:
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 360.85596
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -337.48474
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2532727860512193706, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
@@ -2817,7 +2817,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6536\u5165\u5DEE\u989D:"
+  m_text: "\u6750\u6599\u8D39:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f737db678b54e0249ae114f63356a5b4, type: 2}
   m_sharedMaterial: {fileID: 2556921811394286594, guid: f737db678b54e0249ae114f63356a5b4,
@@ -5496,10 +5496,10 @@ RectTransform:
   - {fileID: 1180799976538290700}
   m_Father: {fileID: 6502441293732785360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 48, y: 30}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &1157644781310634208
 RectTransform:
@@ -13693,8 +13693,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 542.9, y: -179}
-  m_SizeDelta: {x: 265.1057, y: 36.8901}
+  m_AnchoredPosition: {x: 528.76117, y: -179}
+  m_SizeDelta: {x: 236.828, y: 36.8901}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3483406951095386031
 MonoBehaviour:
@@ -18312,10 +18312,10 @@ RectTransform:
   - {fileID: 4969839495204473284}
   m_Father: {fileID: 6502441293732785360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 55.3, y: 0}
-  m_SizeDelta: {x: 48, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &5251886851165224522
 RectTransform:
@@ -22304,8 +22304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e61a71311864435b1d875fcb2dd1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellInterval: 0.19517249
-  scrollOffset: 0.19517249
+  cellInterval: 0.17625552
+  scrollOffset: 0.17625552
   loop: 0
   cellContainer: {fileID: 4472238135586969018}
   reuseCellMarginCount: 0
@@ -22500,7 +22500,7 @@ PrefabInstance:
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
       propertyPath: m_Options.m_Options.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
@@ -22540,26 +22540,31 @@ PrefabInstance:
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[7].m_Text
-      value: "\u76D2"
+      value: "\u4E2A"
       objectReference: {fileID: 0}
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[8].m_Text
-      value: ml
+      value: "\u76D2"
       objectReference: {fileID: 0}
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[9].m_Text
-      value: g
+      value: ml
       objectReference: {fileID: 0}
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[10].m_Text
-      value: mg
+      value: g
       objectReference: {fileID: 0}
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[11].m_Text
+      value: mg
+      objectReference: {fileID: 0}
+    - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,
+        type: 3}
+      propertyPath: m_Options.m_Options.Array.data[12].m_Text
       value: kg
       objectReference: {fileID: 0}
     - target: {fileID: 212230742078659194, guid: bf98ac52868dc9743a03975f7b0c4ced,

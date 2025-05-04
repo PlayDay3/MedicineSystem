@@ -143,20 +143,23 @@ public class Row : MonoBehaviour
                     case "块":
                         TempDrop.value = 6;
                         break;
-                    case "盒":
+                    case "个":
                         TempDrop.value = 7;
                         break;
-                    case "ml":
+                    case "盒":
                         TempDrop.value = 8;
                         break;
-                    case "g":
+                    case "ml":
                         TempDrop.value = 9;
                         break;
-                    case "mg":
+                    case "g":
                         TempDrop.value = 10;
                         break;
-                    case "kg":
+                    case "mg":
                         TempDrop.value = 11;
+                        break;
+                    case "kg":
+                        TempDrop.value = 12;
                         break;
                 }
                 TempDrop.RefreshShownValue();
@@ -385,18 +388,21 @@ public class Row : MonoBehaviour
                         medicineData.MedicineMessage.minunit = BaseEnum.块;
                         break;
                     case 7:
-                        medicineData.MedicineMessage.minunit = BaseEnum.盒;
+                        medicineData.MedicineMessage.minunit = BaseEnum.个;
                         break;
                     case 8:
-                        medicineData.MedicineMessage.minunit = BaseEnum.ml;
+                        medicineData.MedicineMessage.minunit = BaseEnum.盒;
                         break;
                     case 9:
-                        medicineData.MedicineMessage.minunit = BaseEnum.g;
+                        medicineData.MedicineMessage.minunit = BaseEnum.ml;
                         break;
                     case 10:
-                        medicineData.MedicineMessage.minunit = BaseEnum.mg;
+                        medicineData.MedicineMessage.minunit = BaseEnum.g;
                         break;
                     case 11:
+                        medicineData.MedicineMessage.minunit = BaseEnum.mg;
+                        break;
+                    case 12:
                         medicineData.MedicineMessage.minunit = BaseEnum.kg;
                         break;
                 }
@@ -463,21 +469,24 @@ public class Row : MonoBehaviour
                         medicineData.Useway = Useway.外用;
                         break;
                     case 5:
-                        medicineData.Useway = Useway.静脉滴注;
+                        medicineData.Useway = Useway.煎服;
                         break;
                     case 6:
-                        medicineData.Useway = Useway.ivdrip15gtt_min;
+                        medicineData.Useway = Useway.静脉滴注;
                         break;
                     case 7:
-                        medicineData.Useway = Useway.ivdrip40gtt_min;
+                        medicineData.Useway = Useway.ivdrip15gtt_min;
                         break;
                     case 8:
-                        medicineData.Useway = Useway.ivdrip50gtt_min;
+                        medicineData.Useway = Useway.ivdrip40gtt_min;
                         break;
                     case 9:
-                        medicineData.Useway = Useway.ivdrip60gtt_min;
+                        medicineData.Useway = Useway.ivdrip50gtt_min;
                         break;
                     case 10:
+                        medicineData.Useway = Useway.ivdrip60gtt_min;
+                        break;
+                    case 11:
                         medicineData.Useway = Useway.im;
                         break;
 
@@ -802,25 +811,79 @@ public class Row : MonoBehaviour
                     medicineData.Useway = Useway.口服;
                     break;
                 case 1:
-                    medicineData.Useway = Useway.静脉滴注;
+                    medicineData.Useway = Useway.晚上睡前口服;
                     break;
                 case 2:
-                    medicineData.Useway = Useway.外用;
+                    medicineData.Useway = Useway.必要时口服;
                     break;
                 case 3:
-                    medicineData.Useway = Useway.ivdrip15gtt_min;
+                    medicineData.Useway = Useway.冲服;
                     break;
                 case 4:
-                    medicineData.Useway = Useway.ivdrip40gtt_min;
+                    medicineData.Useway = Useway.外用;
                     break;
                 case 5:
+                    medicineData.Useway = Useway.煎服;
+                    break;
+                case 6:
+                    medicineData.Useway = Useway.静脉滴注;
+                    break;
+                case 7:
+                    medicineData.Useway = Useway.ivdrip15gtt_min;
+                    break;
+                case 8:
+                    medicineData.Useway = Useway.ivdrip40gtt_min;
+                    break;
+                case 9:
+                    medicineData.Useway = Useway.ivdrip50gtt_min;
+                    break;
+                case 10:
                     medicineData.Useway = Useway.ivdrip60gtt_min;
+                    break;
+                case 11:
+                    medicineData.Useway = Useway.im;
                     break;
 
             }
         }
 
     }
+                    //    case 0:
+                    //    medicineData.Useway=Useway.口服;
+                    //    break;
+                    //case 1:
+                    //    medicineData.Useway = Useway.晚上睡前口服;
+                    //    break;
+                    //case 2:
+                    //    medicineData.Useway = Useway.必要时口服;
+                    //    break;
+                    //case 3:
+                    //    medicineData.Useway = Useway.冲服;
+                    //    break;
+                    //case 4:
+                    //    medicineData.Useway = Useway.外用;
+                    //    break;
+                    //case 5:
+                    //    medicineData.Useway = Useway.煎服;
+                    //    break;
+                    //case 6:
+                    //    medicineData.Useway = Useway.静脉滴注;
+                    //    break;
+                    //case 7:
+                    //    medicineData.Useway = Useway.ivdrip15gtt_min;
+                    //    break;
+                    //case 8:
+                    //    medicineData.Useway = Useway.ivdrip40gtt_min;
+                    //    break;
+                    //case 9:
+                    //    medicineData.Useway = Useway.ivdrip50gtt_min;
+                    //    break;
+                    //case 10:
+                    //    medicineData.Useway = Useway.ivdrip60gtt_min;
+                    //    break;
+                    //case 11:
+                    //    medicineData.Useway = Useway.im;
+                    //    break;
 
     public void OnValueChange()
     {
