@@ -72,14 +72,23 @@ public class TextWord : MonoBehaviour
             doc.FirstSection.PageSetup.PaperSize = PaperSize.Custom;
             doc.FirstSection.PageSetup.PageWidth = ConvertUtil.InchToPoint(5.5);
             doc.FirstSection.PageSetup.PageHeight = ConvertUtil.InchToPoint(8.5);
-            doc.FirstSection.PageSetup.RightMargin = ConvertUtil.MillimeterToPoint(6);
-            doc.FirstSection.PageSetup.LeftMargin = 36; // 0.5 inch
+            doc.FirstSection.PageSetup.RightMargin = ConvertUtil.MillimeterToPoint(4);
+            doc.FirstSection.PageSetup.LeftMargin = ConvertUtil.MillimeterToPoint(8);
             doc.FirstSection.PageSetup.TopMargin = 36;
             doc.FirstSection.PageSetup.BottomMargin = 36;
 
+            double pageWidth = ConvertUtil.InchToPoint(5.5);
+            double leftMargin = ConvertUtil.MillimeterToPoint(8);
+            double rightMargin = ConvertUtil.MillimeterToPoint(6);
+            double usableWidth = pageWidth - leftMargin - rightMargin;
+
+            double col1Width = usableWidth * 0.30;
+            double col2Width = usableWidth * 0.3;
+            double col3Width = usableWidth * 0.4;
+
             // 设置标题
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            builder.Font.Size = 16; // 缩小字体以适应 Statement 尺寸
+            builder.Font.Size = 16;
             builder.Writeln("多祝镇皇思扬村卫生站处方笺");
             builder.Font.Size = 10;
             builder.Writeln();
@@ -91,7 +100,6 @@ public class TextWord : MonoBehaviour
             builder.Writeln($"就诊时间:{Prescription.Patient.Date}");
             builder.Writeln();
 
-            // 患者信息
             builder.Font.Underline = Underline.Single;
             builder.Write($"姓名:{Prescription.Patient.Name}\t\t性别:{Prescription.Patient.Sex}\t\t年龄:{Prescription.Patient.age}");
             builder.Writeln();
@@ -120,18 +128,29 @@ public class TextWord : MonoBehaviour
 
             for (int i = 0; i < Prescription.MedicineLsit.Count; i++)
             {
-                builder.InsertCell(); builder.Write($"{i + 1}");
-                builder.InsertCell(); builder.Write($"{Prescription.MedicineLsit[i].MedicineMessage.Name}");
-                builder.InsertCell(); builder.Write($"{Prescription.MedicineLsit[i].MedicineMessage.dosage}{Prescription.MedicineLsit[i].MedicineMessage.doseunit}" +
-                    $"*{Prescription.MedicineLsit[i].MedicineMessage.capacity}{Prescription.MedicineLsit[i].MedicineMessage.minunit}/{Prescription.MedicineLsit[i].MedicineMessage.maxunit}");
+                // 第一行：编号、药品名称、规格
+                builder.InsertCell(); builder.CellFormat.Width = col1Width;
+                builder.Write($"{i + 1}");
+
+                builder.InsertCell(); builder.CellFormat.Width = col2Width;
+                builder.Write($"{Prescription.MedicineLsit[i].MedicineMessage.Name}");
+
+                builder.InsertCell(); builder.CellFormat.Width = col3Width;
+                builder.Write($"{Prescription.MedicineLsit[i].MedicineMessage.dosage}{Prescription.MedicineLsit[i].MedicineMessage.doseunit}*" +
+                    $"{Prescription.MedicineLsit[i].MedicineMessage.capacity}{Prescription.MedicineLsit[i].MedicineMessage.minunit}/" +
+                    $"{Prescription.MedicineLsit[i].MedicineMessage.maxunit}");
                 builder.EndRow();
 
-                builder.InsertCell();
+                // 第二行：用法、每次、每日等
+                builder.InsertCell(); builder.CellFormat.Width = col1Width;
                 builder.Write($"用法:{Prescription.MedicineLsit[i].Useway.ToString().Replace("_", "/")}");
-                builder.InsertCell();
+
+                builder.InsertCell(); builder.CellFormat.Width = col2Width;
                 builder.Write($"每次:{Prescription.MedicineLsit[i].eatdose}{Prescription.MedicineLsit[i].MedicineMessage.minunit}");
-                builder.InsertCell();
-                builder.Write($"每日{Prescription.MedicineLsit[i].Times}次\t{Prescription.MedicineLsit[i].Day}天\t{Prescription.MedicineLsit[i].addnumber}{Prescription.MedicineLsit[i].MedicineMessage.minunit}");
+
+                builder.InsertCell(); builder.CellFormat.Width = col3Width;
+                builder.Write($"每日{Prescription.MedicineLsit[i].Times}次\t{Prescription.MedicineLsit[i].Day}天\t" +
+                              $"{Prescription.MedicineLsit[i].addnumber}{Prescription.MedicineLsit[i].MedicineMessage.minunit}");
                 builder.EndRow();
             }
 
@@ -140,9 +159,12 @@ public class TextWord : MonoBehaviour
             builder.Writeln();
 
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.Writeln($"医师:{Prescription.Doctor}\t\t挂号费{Prescription.SignCost}\t注射费{Prescription.InjectionCost}\t治疗费{Prescription.TreatmentCost}\t材料费{Prescription.Profit}");
+            builder.Writeln($"医师:{Prescription.Doctor}\t挂号费{Prescription.SignCost}\t注射费{Prescription.InjectionCost}" +
+                            $"\t治疗费{Prescription.TreatmentCost}\t材料费{Prescription.Profit}");
             builder.Writeln();
-            builder.Writeln($"审核:{Prescription.Check}\t\t药品费{Prescription.MedicineCost}\t基本费{Prescription.OriginalCost}\t其他{Prescription.OtherCost}\t\t总计:{Prescription.SumCost}");
+
+            builder.Writeln($"审核:{Prescription.Check}\t药品费{Prescription.MedicineCost}\t基本费{Prescription.OriginalCost}" +
+                            $"\t其他{Prescription.OtherCost}\t\t总计:{Prescription.SumCost}");
 
             doc.Save(filePath);
             UnityEngine.Debug.Log($"文档已成功保存至 {filePath}");
@@ -156,6 +178,7 @@ public class TextWord : MonoBehaviour
             UnityEngine.Debug.LogError($"生成处方文档时发生异常: {ex.Message}");
         }
     }
+
 
 
 

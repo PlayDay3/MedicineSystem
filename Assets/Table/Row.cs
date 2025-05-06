@@ -272,23 +272,26 @@ public class Row : MonoBehaviour
                     case "ÍâÓÃ":
                         TempDrop.value = 4;
                         break;
-                    case "¾²ÂöµÎ×¢":
+                    case "¼å·þ":
                         TempDrop.value = 5;
                         break;
-                    case "ivdrip15gtt_min":
+                    case "¾²ÂöµÎ×¢":
                         TempDrop.value = 6;
                         break;
-                    case "ivdrip40gtt_min":
+                    case "ivdrip15gtt_min":
                         TempDrop.value = 7;
                         break;
-                    case "ivdrip50gtt_min":
+                    case "ivdrip40gtt_min":
                         TempDrop.value = 8;
                         break;
-                    case "ivdrip60gtt_min":
+                    case "ivdrip50gtt_min":
                         TempDrop.value = 9;
                         break;
-                    case "im":
+                    case "ivdrip60gtt_min":
                         TempDrop.value = 10;
+                        break;
+                    case "im":
+                        TempDrop.value = 11;
                         break;
                 }
                 TempDrop.RefreshShownValue();
