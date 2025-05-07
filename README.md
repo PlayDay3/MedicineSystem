@@ -13,6 +13,6 @@
 ![image](https://github.com/user-attachments/assets/8368ba4d-af43-4bf4-837d-aef4865f2a79)
 - 在处方单界面中，可以编写病人的信息，以及需要服用的药品信息
 ![image](https://github.com/user-attachments/assets/ad030d9f-a45b-4c93-a6c8-b795e15fd49c)
--点击保存为Word文档即可生成.doc文档
+- 点击保存为Word文档即可生成.doc文档
 ![image](https://github.com/user-attachments/assets/08d60095-297a-4cda-ac91-06f26d07879d)
 
