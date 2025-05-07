@@ -758,6 +758,26 @@ PrefabInstance:
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3462287899866988922}
+    - target: {fileID: 322577394569764762, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 720.574
+      objectReference: {fileID: 0}
+    - target: {fileID: 322577394569764762, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 246.1349
+      objectReference: {fileID: 0}
+    - target: {fileID: 322577394569764762, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 331.867
+      objectReference: {fileID: 0}
+    - target: {fileID: 322577394569764762, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -110.179436
+      objectReference: {fileID: 0}
     - target: {fileID: 368920832488118259, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1164,22 +1184,22 @@ PrefabInstance:
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 360.85596
       objectReference: {fileID: 0}
     - target: {fileID: 2288627248540882664, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -337.48474
       objectReference: {fileID: 0}
     - target: {fileID: 2532727860512193706, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
@@ -1686,8 +1706,14 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 6748339650491385390, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2556921811394286594, guid: f737db678b54e0249ae114f63356a5b4,
+        type: 2}
+    - target: {fileID: 6748339650491385390, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6788238900858886954, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
@@ -1771,6 +1797,11 @@ PrefabInstance:
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7302485324039256513, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7549432939478988476, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1780,6 +1811,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.z
       value: 200.29901
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988873306307684414, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 711.7794
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988873306307684414, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 251.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988873306307684414, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 330.7597
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988873306307684414, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -107.4
       objectReference: {fileID: 0}
     - target: {fileID: 8155701414014350985, guid: ebe5bd9979e70474b8f5bfbd3230e2c7,
         type: 3}
@@ -22304,8 +22355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e61a71311864435b1d875fcb2dd1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellInterval: 0.22817127
-  scrollOffset: 0.22817127
+  cellInterval: 0.19517249
+  scrollOffset: 0.19517249
   loop: 0
   cellContainer: {fileID: 4472238135586969018}
   reuseCellMarginCount: 0
