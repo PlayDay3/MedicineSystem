@@ -796,6 +796,30 @@ public class Row : MonoBehaviour
         TableManager.Instance.EditList(medicineData);
         TableManager.Instance.displayTable();
     }
+    public void UpItem()
+    {
+        if (medicineData.ListID > 0)
+        {
+            returnItem();
+            changeNumber();
+            TableManager.Instance.EditList(medicineData);
+            TableManager.Instance.SwapItem(medicineData.ListID, medicineData.ListID - 1);
+            medicineData.ListID--;
+            TableManager.Instance.displayTable();
+        }
+    }
+    public void DownItem()
+    {
+        if (medicineData.ListID < TableManager.Instance.currentTable.Count)
+        {
+            returnItem();
+            changeNumber();
+            TableManager.Instance.EditList(medicineData);
+            TableManager.Instance.SwapItem(medicineData.ListID, medicineData.ListID + 1);
+            medicineData.ListID++;
+            TableManager.Instance.displayTable();
+        }
+    }
 
     public void AddSellList()
     {

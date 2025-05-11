@@ -300,7 +300,7 @@ public class TableManager : MonoBehaviour
         }
 
 
-        SetListID();
+        SetListID(bankTable);
         displayTable();
     }
 
@@ -380,7 +380,7 @@ public class TableManager : MonoBehaviour
             }
             bankTable.Add(Temp);
         }
-        SetListID();
+        SetListID(bankTable);
     }
     public void returnMedicineList(List<MedicineData> MedicineList)//将处方单药物放回BankList
     {
@@ -427,16 +427,32 @@ public class TableManager : MonoBehaviour
 
     }
 
-    public void SwapItem(int index1,int index2)
+    public void SwapItem(int index1, int index2)
     {
+        if (index1 < 0 || index2 < 0 ||
+            index1 >= currentTable.Count ||
+            index2 >= currentTable.Count ||
+            index1 == index2)
+        {
+            UnityEngine.Debug.LogWarning("SwapItem: 索引无效或索引相同，交换操作已跳过。");
+            return;
+        }
 
+        MedicineData TempData = currentTable[index1];
+        currentTable[index1] = currentTable[index2];
+        currentTable[index2] = TempData;
+
+        SetListID(currentTable);
+        MedicineSerializable.instance.SaveData();
+        MedicineSerializable.instance.SaveNameList();
     }
 
-    public void SetListID()
+
+    public void SetListID(List<MedicineData> list)
     {
-        for(int i = 0; i < bankTable.Count;i++)
+        for(int i = 0; i < list.Count;i++)
         {
-            bankTable[i].ListID= i;
+            list[i].ListID= i;
         }
     }
     public void ReturnCanvas()
