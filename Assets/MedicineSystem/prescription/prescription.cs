@@ -275,6 +275,15 @@ public class prescription : MonoBehaviour
         {
             PrescriptionMessage.Patient.T = 0;
         }
+        Field = BackGround.transform.Find("体重").GetChild(1).GetComponent<TMP_InputField>();
+        if (Field.text != "")
+        {
+            PrescriptionMessage.Patient.Weight = float.Parse(Field.text);
+        }
+        else
+        {
+            PrescriptionMessage.Patient.Weight = 0;
+        }
 
 
         Field = BackGround.transform.Find("心率").GetChild(1).GetComponent<TMP_InputField>();

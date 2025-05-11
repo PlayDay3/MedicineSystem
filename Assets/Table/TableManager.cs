@@ -427,6 +427,11 @@ public class TableManager : MonoBehaviour
 
     }
 
+    public void SwapItem(int index1,int index2)
+    {
+
+    }
+
     public void SetListID()
     {
         for(int i = 0; i < bankTable.Count;i++)

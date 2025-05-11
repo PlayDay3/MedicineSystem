@@ -77,48 +77,10 @@ public class TextWord : MonoBehaviour
             doc.FirstSection.PageSetup.TopMargin = 36;
             doc.FirstSection.PageSetup.BottomMargin = 36;
 
-            // 设置标题
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            builder.Font.Size = 16;
-            builder.Font.Name = "宋体"; // 中文标题用宋体
-            builder.Writeln("多祝镇皇思扬村卫生站处方笺");
-            builder.Font.Size = 10;
-            builder.Writeln();
+            // 病人信息
+            WritePatientMessage(builder);
 
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Right;
-            builder.Writeln($"No.{Prescription.PrescriptionId}");
 
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.Writeln($"就诊时间:{Prescription.Patient.Date}");
-            builder.Writeln();
-
-            builder.Font.Underline = Underline.Single;
-            builder.Write($"姓名:{Prescription.Patient.Name}\t\t性别:{Prescription.Patient.Sex}\t\t年龄:{Prescription.Patient.age}");
-            builder.Writeln();
-
-            if (Prescription.Patient.T != 0)
-                builder.Write($"体温:{Prescription.Patient.T}度\t");
-            if (Prescription.Patient.P != 0)
-                builder.Write($"心率:{Prescription.Patient.P}次/分\t");
-            if (Prescription.Patient.BP_b != 0 || Prescription.Patient.BP_p != 0)
-                builder.Write($"血压:{Prescription.Patient.BP_b}/{Prescription.Patient.BP_p}mmhg\t");
-            if (Prescription.Patient.Blood_Sugar != 0)
-                builder.Write($"血糖:{Prescription.Patient.Blood_Sugar}mmol/L");
-            builder.Writeln();
-
-            builder.Writeln($"临床诊断:{Prescription.Patient.Description}");
-            builder.Writeln();
-
-            builder.Writeln($"地址:{Prescription.Patient.Location}\t电话:{Prescription.Patient.number}");
-            builder.Writeln();
-
-            builder.Font.Underline = Underline.None;
-            builder.Writeln("Rp.");
-            builder.Writeln();
-
-            // 设置等宽字体用于精确对齐
-            builder.Font.Name = "Courier New";
-            builder.Font.Size = 10;
 
             // 每列起始位置（字符位置）
             int col1Start = 0;    // 编号起始位置
@@ -141,28 +103,32 @@ public class TextWord : MonoBehaviour
                                                         $"{med.MedicineMessage.capacity}{med.MedicineMessage.minunit}/" +
                                                         $"{med.MedicineMessage.maxunit}";  // 规格部分
                 builder.Writeln(line1);
-
                 // 第二行：用法、每次、每日等
                 string line2 = "";
                 string usewayText = $"用法:{med.Useway.ToString().Replace("_", "/")}";
                 tabs= GetTabs(usewayText,false);
                 line2 = usewayText + tabs;
-                line2 += $"每次:{med.eatdose}{med.MedicineMessage.minunit}\t";
-                line2 += $"每日:{med.Times}次 {med.Day}天 {med.addnumber}{med.MedicineMessage.minunit}";
-
+                line2 += $"每次{med.eatdose}{med.MedicineMessage.minunit}\t";
+                line2 += $"每日{med.Times}次 {med.Day}天 {med.addnumber}{med.MedicineMessage.minunit}";
                 builder.Writeln(line2);
-                builder.Writeln(); 
+                builder.Writeln();
+                if ((i + 1) % 5 == 0)//每五个药品一页，超过五页新增一页
+                {
+                    if (i != Prescription.MedicineLsit.Count - 1)
+                    {
+                        builder.Writeln(new string('-', 60));
+                        builder.Writeln("以下空白");
+                    }
+                    builder.InsertBreak(BreakType.PageBreak);
+                    WritePatientMessage(builder);
+
+                }
             }
+            // 横线
+            builder.Writeln(new string('-', 60));
+            builder.Writeln("以下空白");
 
-            // 恢复字体
-            builder.Font.Name = "宋体";
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-            builder.Writeln($"医师:{Prescription.Doctor}\t挂号费{Prescription.SignCost}\t注射费{Prescription.InjectionCost}" +
-                            $"\t治疗费{Prescription.TreatmentCost}\t材料费{Prescription.Profit}");
-            builder.Writeln();
-
-            builder.Writeln($"审核:{Prescription.Check}\t药品费{Prescription.MedicineCost}\t基本费{Prescription.OriginalCost}" +
-                            $"\t其他{Prescription.OtherCost}\t\t总计:{Prescription.SumCost}");
+            WriteCostFooter(builder);//费用
 
             doc.Save(filePath);
             UnityEngine.Debug.Log($"文档已成功保存至 {filePath}");
@@ -176,7 +142,90 @@ public class TextWord : MonoBehaviour
             UnityEngine.Debug.LogError($"生成处方文档时发生异常: {ex.Message}");
         }
     }
+    void WriteCostFooter(DocumentBuilder builder)
+    {
+        Section section = builder.CurrentSection;
+        section.HeadersFooters.LinkToPrevious(false);
+        builder.MoveToHeaderFooter(HeaderFooterType.FooterPrimary);
 
+        builder.Font.Name = "宋体";
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+
+        builder.Writeln(new string('-', 60));
+        builder.Font.Size = 10.5;
+        builder.Write("医师:");
+        builder.Font.Underline = Underline.Single;
+        builder.Write(Prescription.Doctor);
+        builder.Font.Underline = Underline.None;
+
+        builder.Write($"\t挂号费:{Prescription.SignCost.ToString("F2")}" +
+                      $"\t注射费:{Prescription.InjectionCost.ToString("F2")}" +
+                      $"\t治疗费:{Prescription.TreatmentCost.ToString("F2")}" +
+                      $"\t材料费:{Prescription.Profit.ToString("F2")}");
+        builder.Writeln();
+
+        builder.Write("审核:");
+        builder.Font.Underline = Underline.Single;
+        builder.Write(Prescription.Check);
+        builder.Font.Underline = Underline.None;
+
+        builder.Writeln($"\t药品费:{Prescription.MedicineCost.ToString("F2")}" +
+                      $"\t基本费:{Prescription.OriginalCost.ToString("F2")}" +
+                      $"\t其他:{Prescription.OtherCost.ToString("F2")}" +
+                      $"\t总计:{Prescription.SumCost.ToString("F2")}");
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+        builder.Write("第 ");
+        builder.InsertField("PAGE", "");
+        builder.Write(" 页，共 ");
+        builder.InsertField("NUMPAGES", "");
+        builder.Write(" 页");
+    }
+
+    void WritePatientMessage(DocumentBuilder builder)//病人信息
+    {
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+        builder.Font.Size = 16;
+        builder.Font.Name = "宋体"; // 中文标题用宋体
+        builder.Writeln("多祝镇皇思扬村卫生站处方笺");
+        builder.Font.Size = 10;
+        builder.Writeln();
+
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Right;
+        builder.Writeln($"No.{Prescription.PrescriptionId}");
+
+        builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+        builder.Writeln($"就诊时间:{Prescription.Patient.Date}");
+        builder.Writeln();
+
+        builder.Font.Underline = Underline.Single;
+        builder.Write($"姓名:{Prescription.Patient.Name}\t\t性别:{Prescription.Patient.Sex}\t\t年龄:{Prescription.Patient.age}");
+        builder.Writeln();
+
+        if (Prescription.Patient.T != 0)
+            builder.Write($"体温:{Prescription.Patient.T}度\t");
+        if (Prescription.Patient.Weight != 0)
+            builder.Write($"体重:{Prescription.Patient.Weight}千克\t");
+        if (Prescription.Patient.P != 0)
+            builder.Write($"心率:{Prescription.Patient.P}次/分\t");
+        if (Prescription.Patient.BP_b != 0 || Prescription.Patient.BP_p != 0)
+            builder.Write($"血压:{Prescription.Patient.BP_b}/{Prescription.Patient.BP_p}mmhg\t");
+        if (Prescription.Patient.Blood_Sugar != 0)
+            builder.Write($"血糖:{Prescription.Patient.Blood_Sugar}mmol/L");
+        builder.Writeln();
+
+        builder.Writeln($"临床诊断:{Prescription.Patient.Description}");
+        builder.Writeln();
+
+        builder.Writeln($"地址:{Prescription.Patient.Location}\t电话:{Prescription.Patient.number}");
+        builder.Writeln();
+        builder.Font.Underline = Underline.None;
+        builder.Writeln("Rp.");
+        builder.Writeln();
+
+        // 设置等宽字体用于精确对齐
+        builder.Font.Name = "Courier New";
+        builder.Font.Size = 10;
+    }
 
 
     public string GetTabs(string value,bool isChinese)

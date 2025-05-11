@@ -21,6 +21,7 @@ public class PrescriptionMessage
         public string Location;
         public string number;
         public float T;//体温
+        public float Weight;//体重
         public float P;//心率
         public float BP_b;
         public float BP_p;
