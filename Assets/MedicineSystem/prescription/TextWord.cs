@@ -111,21 +111,34 @@ public class TextWord : MonoBehaviour
                 line2 += $"每次{med.eatdose}{med.MedicineMessage.minunit}\t";
                 line2 += $"每日{med.Times}次 {med.Day}天 {med.addnumber}{med.MedicineMessage.minunit}";
                 builder.Writeln(line2);
-                builder.Writeln();
-                if ((i + 1) % 5 == 0)//每五个药品一页，超过五页新增一页
+                if ((i + 1) % 5 != 0&& (i + 1) < Prescription.MedicineLsit.Count)
+                {
+                    builder.Writeln();
+                }
+                if ((i + 1) % 5 == 0 && (i + 1) < Prescription.MedicineLsit.Count)//每五个药品一页，超过五页新增一页
                 {
                     if (i != Prescription.MedicineLsit.Count - 1)
                     {
-                        builder.Writeln(new string('-', 60));
+                        builder.ParagraphFormat.Borders.Bottom.LineStyle = LineStyle.Single;
+                        builder.ParagraphFormat.Borders.Bottom.LineWidth = 1.0;
+                        builder.Writeln();
+                        // 清除边框设置，避免影响后续段落
+                        builder.ParagraphFormat.Borders.ClearFormatting();
                         builder.Writeln("以下空白");
                     }
                     builder.InsertBreak(BreakType.PageBreak);
                     WritePatientMessage(builder);
 
                 }
+
+
             }
             // 横线
-            builder.Writeln(new string('-', 60));
+            builder.ParagraphFormat.Borders.Bottom.LineStyle = LineStyle.Single;
+            builder.ParagraphFormat.Borders.Bottom.LineWidth = 1.0;
+            builder.Writeln();
+            // 清除边框设置，避免影响后续段落
+            builder.ParagraphFormat.Borders.ClearFormatting();
             builder.Writeln("以下空白");
 
             WriteCostFooter(builder);//费用
@@ -150,9 +163,12 @@ public class TextWord : MonoBehaviour
 
         builder.Font.Name = "宋体";
         builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-
-        builder.Writeln(new string('-', 60));
         builder.Font.Size = 10.5;
+        builder.ParagraphFormat.Borders.Bottom.LineStyle = LineStyle.Single;
+        builder.ParagraphFormat.Borders.Bottom.LineWidth = 1.0;
+        builder.Writeln("超过(门诊7日)用量原因:1.慢性病 2.老年病");
+        // 清除边框设置，避免影响后续段落
+        builder.ParagraphFormat.Borders.ClearFormatting();
         builder.Write("医师:");
         builder.Font.Underline = Underline.Single;
         builder.Write(Prescription.Doctor);

@@ -236,6 +236,12 @@ public class Row : MonoBehaviour
                 field = this.transform.Find("添加数量")?.GetChild(0)?.GetComponent<TMP_InputField>();
                 if (field) field.text = medicineData.addnumber.ToString();
 
+                field = this.transform.Find("服用天数")?.GetChild(0)?.GetComponent<TMP_InputField>();
+                if (field) field.text = medicineData.Day.ToString();
+
+                field = this.transform.Find("单次剂量")?.GetChild(0)?.GetComponent<TMP_InputField>();
+                if (field) field.text = medicineData.eatdose.ToString();
+
                 TempDrop = this.transform.Find("服用次数")?.GetChild(1).GetComponent<TMP_Dropdown>();
                 TempDrop.onValueChanged.RemoveAllListeners();
                 switch (medicineData.Times.ToString())
@@ -269,29 +275,35 @@ public class Row : MonoBehaviour
                     case "冲服":
                         TempDrop.value = 3;
                         break;
-                    case "外用":
+                    case "含服":
                         TempDrop.value = 4;
                         break;
-                    case "煎服":
+                    case "外用":
                         TempDrop.value = 5;
                         break;
-                    case "静脉滴注":
+                    case "煎服":
                         TempDrop.value = 6;
                         break;
-                    case "ivdrip15gtt_min":
+                    case "雾化":
                         TempDrop.value = 7;
                         break;
-                    case "ivdrip40gtt_min":
+                    case "静脉滴注":
                         TempDrop.value = 8;
                         break;
-                    case "ivdrip50gtt_min":
+                    case "ivdrip15gtt_min":
                         TempDrop.value = 9;
                         break;
-                    case "ivdrip60gtt_min":
+                    case "ivdrip40gtt_min":
                         TempDrop.value = 10;
                         break;
-                    case "im":
+                    case "ivdrip50gtt_min":
                         TempDrop.value = 11;
+                        break;
+                    case "ivdrip60gtt_min":
+                        TempDrop.value = 12;
+                        break;
+                    case "im":
+                        TempDrop.value = 13;
                         break;
                 }
                 TempDrop.RefreshShownValue();
@@ -457,7 +469,7 @@ public class Row : MonoBehaviour
                 switch (dropdown.value)
                 {
                     case 0:
-                        medicineData.Useway=Useway.口服;
+                        medicineData.Useway = Useway.口服;
                         break;
                     case 1:
                         medicineData.Useway = Useway.晚上睡前口服;
@@ -469,27 +481,33 @@ public class Row : MonoBehaviour
                         medicineData.Useway = Useway.冲服;
                         break;
                     case 4:
-                        medicineData.Useway = Useway.外用;
+                        medicineData.Useway = Useway.含服;
                         break;
                     case 5:
-                        medicineData.Useway = Useway.煎服;
+                        medicineData.Useway = Useway.外用;
                         break;
                     case 6:
-                        medicineData.Useway = Useway.静脉滴注;
+                        medicineData.Useway = Useway.煎服;
                         break;
                     case 7:
-                        medicineData.Useway = Useway.ivdrip15gtt_min;
+                        medicineData.Useway = Useway.雾化;
                         break;
                     case 8:
-                        medicineData.Useway = Useway.ivdrip40gtt_min;
+                        medicineData.Useway = Useway.静脉滴注;
                         break;
                     case 9:
-                        medicineData.Useway = Useway.ivdrip50gtt_min;
+                        medicineData.Useway = Useway.ivdrip15gtt_min;
                         break;
                     case 10:
-                        medicineData.Useway = Useway.ivdrip60gtt_min;
+                        medicineData.Useway = Useway.ivdrip40gtt_min;
                         break;
                     case 11:
+                        medicineData.Useway = Useway.ivdrip50gtt_min;
+                        break;
+                    case 12:
+                        medicineData.Useway = Useway.ivdrip60gtt_min;
+                        break;
+                    case 13:
                         medicineData.Useway = Useway.im;
                         break;
 
@@ -847,27 +865,33 @@ public class Row : MonoBehaviour
                     medicineData.Useway = Useway.冲服;
                     break;
                 case 4:
-                    medicineData.Useway = Useway.外用;
+                    medicineData.Useway = Useway.含服;
                     break;
                 case 5:
-                    medicineData.Useway = Useway.煎服;
+                    medicineData.Useway = Useway.外用;
                     break;
                 case 6:
-                    medicineData.Useway = Useway.静脉滴注;
+                    medicineData.Useway = Useway.煎服;
                     break;
                 case 7:
-                    medicineData.Useway = Useway.ivdrip15gtt_min;
+                    medicineData.Useway = Useway.雾化;
                     break;
                 case 8:
-                    medicineData.Useway = Useway.ivdrip40gtt_min;
+                    medicineData.Useway = Useway.静脉滴注;
                     break;
                 case 9:
-                    medicineData.Useway = Useway.ivdrip50gtt_min;
+                    medicineData.Useway = Useway.ivdrip15gtt_min;
                     break;
                 case 10:
-                    medicineData.Useway = Useway.ivdrip60gtt_min;
+                    medicineData.Useway = Useway.ivdrip40gtt_min;
                     break;
                 case 11:
+                    medicineData.Useway = Useway.ivdrip50gtt_min;
+                    break;
+                case 12:
+                    medicineData.Useway = Useway.ivdrip60gtt_min;
+                    break;
+                case 13:
                     medicineData.Useway = Useway.im;
                     break;
 
